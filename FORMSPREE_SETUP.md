@@ -55,10 +55,12 @@ In your Formspree dashboard:
    - Add the email address where you want to receive signups
    - You'll get an email each time someone signs up
 
-2. **Allowed Domains** (for security):
+2. **Allowed Domains** (IMPORTANT for local testing and GitHub Pages):
    - Go to Settings → Security
    - Add your GitHub Pages domain: `yourusername.github.io`
+   - **For local testing**, also add: `localhost` and `127.0.0.1`
    - This prevents others from using your form endpoint
+   - **Note**: Without adding localhost, the form will NOT work when testing locally!
 
 3. **Customize Email Subject**:
    - In form settings, you can customize the email subject line
@@ -67,7 +69,10 @@ In your Formspree dashboard:
 ## Step 6: Test Your Form
 
 1. **Test Locally** (before deploying):
-   - Open `index.html` in your browser
+   - **IMPORTANT**: Make sure you've added `localhost` and `127.0.0.1` to Formspree's allowed domains (Settings → Security)
+   - Use a local server (don't open `index.html` directly with `file://` - it won't work)
+   - If you have `start-server.bat` or `start-server.ps1`, run it to start a local server
+   - Or use Python: `python -m http.server 8000` then visit `http://localhost:8000`
    - Try submitting the form with a test email
    - Check your Formspree dashboard for the submission
    - Check your email inbox for the notification
@@ -87,10 +92,14 @@ In your Formspree dashboard:
 
 ### Form Not Working?
 
-1. **Check the form ID**: Make sure you copied the correct form ID
+1. **Check the form ID**: Make sure you copied the correct form ID (not the placeholder `YOUR_FORMSPREE_ID`)
 2. **Check browser console**: Open Developer Tools (F12) and look for errors
 3. **Check Formspree dashboard**: See if submissions are appearing there
-4. **CORS errors**: Make sure you've added your domain in Formspree settings
+4. **CORS errors**: 
+   - For local testing: Make sure you've added `localhost` and `127.0.0.1` to Formspree's allowed domains
+   - For GitHub Pages: Make sure you've added `yourusername.github.io` to Formspree's allowed domains
+   - Don't open HTML files directly with `file://` - use a local server instead
+5. **Form ID not configured**: If you see "Form is not configured" error, update `script.js` line 100 with your actual Formspree form ID
 
 ### Not Receiving Emails?
 

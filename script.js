@@ -97,12 +97,18 @@ function setupEmailForm() {
             // Option 1: Using Formspree (free service for static sites)
             // Replace 'YOUR_FORMSPREE_ID' with your actual Formspree form ID
             // Get one at https://formspree.io/
-            const formspreeEndpoint = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+            const formspreeEndpoint = 'https://formspree.io/f/mvgdolbr';
+            
+            // Check if Formspree ID is still placeholder
+            if (formspreeEndpoint.includes('YOUR_FORMSPREE_ID')) {
+                throw new Error('Formspree form ID not configured. Please update script.js with your Formspree form ID.');
+            }
             
             const response = await fetch(formspreeEndpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                     email: email,
@@ -110,17 +116,39 @@ function setupEmailForm() {
                 })
             });
 
+            // Parse response to check for Formspree errors
+            const responseData = await response.json();
+            
             if (response.ok) {
                 showMessage('Thank you! You\'ve been successfully added to our mailing list.', 'success');
                 emailInput.value = '';
             } else {
-                throw new Error('Submission failed');
+                // Handle Formspree-specific errors
+                const errorMsg = responseData.error || responseData.errors?.[0]?.message || 'Submission failed. Please try again.';
+                throw new Error(errorMsg);
             }
         } catch (error) {
+            // Log error for debugging
+            console.error('Form submission error:', error);
+            
+            // Show user-friendly error message
+            if (error.message.includes('Formspree form ID not configured')) {
+                showMessage('Form is not configured. Please contact the site administrator.', 'error');
+            } else if (error.message.includes('CORS') || error.message.includes('Failed to fetch')) {
+                // Check if we're on localhost
+                const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                if (isLocalhost) {
+                    showMessage('CORS error: Make sure you\'ve added "localhost" and "127.0.0.1" to Formspree\'s allowed domains in Settings → Security.', 'error');
+                } else {
+                    showMessage('Network error. Please check your connection and try again.', 'error');
+                }
+            } else {
+                showMessage(error.message || 'Unable to submit form. Please try again later.', 'error');
+            }
+            
             // Fallback: Store in localStorage (for demo purposes)
             // In production, you should use a proper email service
-            console.log('Form submission error:', error);
-            console.log('Email to add:', email);
+            console.log('Email to add (fallback):', email);
             
             // Store locally as fallback
             let emails = JSON.parse(localStorage.getItem('bookClubEmails') || '[]');
@@ -128,9 +156,6 @@ function setupEmailForm() {
                 emails.push(email);
                 localStorage.setItem('bookClubEmails', JSON.stringify(emails));
             }
-            
-            showMessage('Thank you! You\'ve been added to our list.', 'success');
-            emailInput.value = '';
         } finally {
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
