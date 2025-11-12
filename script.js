@@ -129,7 +129,7 @@ function setupEmailForm() {
                 localStorage.setItem('bookClubEmails', JSON.stringify(emails));
             }
             
-            showMessage('Thank you! You\'ve been added to our list. (Note: Configure Formspree for production use)', 'success');
+            showMessage('Thank you! You\'ve been added to our list.', 'success');
             emailInput.value = '';
         } finally {
             submitButton.textContent = originalButtonText;
