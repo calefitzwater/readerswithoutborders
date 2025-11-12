@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readers Without Borders</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-decoration"></div>
+        <div class="container">
+            <h1 class="club-name">
+                <span class="readers">Readers</span>
+                <span class="without">Without</span>
+                <span class="borders">Borders</span>
+            </h1>
+            <p class="tagline">Where Borders closed, our pages opened</p>
+            <div class="header-subtitle">A book club without limits</div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Welcome to Readers Without Borders</h2>
+                    <p class="hero-text">We're a community of passionate readers who come together to discuss thought-provoking books, share insights, and connect over our love of literature. Just like the bookstore that inspired our name, we believe in bringing stories across all boundaries.</p>
+                    <div class="book-icon">📖</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="borders-memorial">
+            <div class="container">
+                <div class="borders-image-wrapper">
+                    <img src="borders-bookstore.jpg" alt="Borders Bookstore - A memory of what was" class="borders-image">
+                    <div class="borders-overlay">
+                        <p class="memorial-text">In memory of Borders Books</p>
+                        <p class="memorial-subtext">Where our story began</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="signup">
+            <div class="container">
+                <h2>Join Our Mailing List</h2>
+                <p>Stay updated on upcoming meetings, book selections, and club events.</p>
+                <form id="emailForm" class="signup-form">
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            id="emailInput" 
+                            name="email" 
+                            placeholder="Enter your email address" 
+                            required
+                        >
+                        <button type="submit" class="btn-primary">Sign Up</button>
+                    </div>
+                    <div id="formMessage" class="form-message"></div>
+                </form>
+            </div>
+        </section>
+
+        <section class="next-meeting">
+            <div class="container">
+                <h2>Next Meeting</h2>
+                <div class="meeting-card">
+                    <div class="meeting-date">
+                        <span class="date-label">Date</span>
+                        <span class="date-value" id="nextMeetingDate">TBD</span>
+                    </div>
+                    <div class="meeting-book">
+                        <span class="book-label">This Month's Book</span>
+                        <span class="book-title" id="nextMeetingBook">To be announced</span>
+                    </div>
+                    <div class="meeting-location">
+                        <span class="location-label">Location</span>
+                        <span class="location-value" id="nextMeetingLocation">TBD</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="meeting-history">
+            <div class="container">
+                <h2>Past Meetings</h2>
+                <div id="meetingHistory" class="history-list">
+                    <!-- Past meetings will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Readers Without Borders. All rights reserved.</p>
+            <p class="footer-tagline">Crossing borders, one page at a time</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

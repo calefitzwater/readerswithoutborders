@@ -1,0 +1,28 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.log
+
+# Node modules (if you add any in the future)
+node_modules/
+
+# Environment variables
+.env
+.env.local
+
+# Local testing files (optional - remove if you want to commit these)
+# start-server.bat
+# start-server.ps1
+# TEST_LOCALLY.md
+
