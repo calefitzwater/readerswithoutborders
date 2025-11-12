@@ -104,6 +104,9 @@ function setupEmailForm() {
                 throw new Error('Formspree form ID not configured. Please update script.js with your Formspree form ID.');
             }
             
+            console.log('Submitting to Formspree:', formspreeEndpoint);
+            console.log('Current domain:', window.location.hostname);
+            
             const response = await fetch(formspreeEndpoint, {
                 method: 'POST',
                 headers: {
@@ -116,34 +119,56 @@ function setupEmailForm() {
                 })
             });
 
+            console.log('Response status:', response.status);
+            console.log('Response ok:', response.ok);
+
             // Parse response to check for Formspree errors
-            const responseData = await response.json();
+            let responseData;
+            try {
+                responseData = await response.json();
+                console.log('Response data:', responseData);
+            } catch (parseError) {
+                console.error('Failed to parse response:', parseError);
+                const text = await response.text();
+                console.log('Response text:', text);
+                throw new Error('Invalid response from Formspree. Check console for details.');
+            }
             
             if (response.ok) {
+                console.log('Form submission successful!');
                 showMessage('Thank you! You\'ve been successfully added to our mailing list.', 'success');
                 emailInput.value = '';
             } else {
                 // Handle Formspree-specific errors
-                const errorMsg = responseData.error || responseData.errors?.[0]?.message || 'Submission failed. Please try again.';
+                const errorMsg = responseData.error || responseData.errors?.[0]?.message || responseData.message || 'Submission failed. Please try again.';
+                console.error('Formspree error:', errorMsg, responseData);
                 throw new Error(errorMsg);
             }
         } catch (error) {
             // Log error for debugging
             console.error('Form submission error:', error);
+            console.error('Error details:', {
+                message: error.message,
+                stack: error.stack,
+                hostname: window.location.hostname,
+                origin: window.location.origin
+            });
             
             // Show user-friendly error message
             if (error.message.includes('Formspree form ID not configured')) {
                 showMessage('Form is not configured. Please contact the site administrator.', 'error');
-            } else if (error.message.includes('CORS') || error.message.includes('Failed to fetch')) {
+            } else if (error.message.includes('CORS') || error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
                 // Check if we're on localhost
                 const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
                 if (isLocalhost) {
                     showMessage('CORS error: Make sure you\'ve added "localhost" and "127.0.0.1" to Formspree\'s allowed domains in Settings → Security.', 'error');
                 } else {
-                    showMessage('Network error. Please check your connection and try again.', 'error');
+                    showMessage('CORS/Network error: Make sure "' + window.location.hostname + '" is added to Formspree\'s allowed domains. Check browser console (F12) for details.', 'error');
                 }
+            } else if (error.message.includes('domain') || error.message.includes('not allowed') || error.message.includes('restricted')) {
+                showMessage('Domain not allowed: Make sure "' + window.location.hostname + '" is added to Formspree\'s allowed domains in Settings → Security.', 'error');
             } else {
-                showMessage(error.message || 'Unable to submit form. Please try again later.', 'error');
+                showMessage(error.message || 'Unable to submit form. Please try again later. Check console (F12) for details.', 'error');
             }
             
             // Fallback: Store in localStorage (for demo purposes)
