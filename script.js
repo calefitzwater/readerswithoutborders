@@ -1,9 +1,9 @@
 // Meeting data - Update this with your actual meeting information
 const meetingData = {
     nextMeeting: {
-        date: "December 2024",
-        book: "Reader's Choice",
-        bookNote: "Choose any book you'd like! Just prepare a fun 5-minute presentation about it.",
+        date: "January 2026",
+        book: "Heated Rivalry",
+        bookNote: "The Gay Hockey Romance Book",
         location: "TBD"
     },
     pastMeetings: [
