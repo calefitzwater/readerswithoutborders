@@ -2,7 +2,7 @@
 const meetingData = {
     nextMeeting: {
         date: "January 2026",
-        book: "Heated Rivalry",
+        book: "Heated Rivalry by Rachel Reid",
         bookNote: "The Gay Hockey Romance Book",
         location: "TBD"
     },
@@ -24,7 +24,7 @@ const meetingData = {
         },
         {
             date: "May 2025",
-            book: "Red Rising",
+            book: "Red Rising by Pierce Brown",
             location: "Cale's"
         }
     ]
