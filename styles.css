@@ -209,22 +209,31 @@ section h2 {
 /* Borders Memorial Section */
 .borders-memorial {
     padding: 3rem 0;
-    background: 
-        radial-gradient(circle at 30% 50%, rgba(201, 169, 97, 0.05) 0%, transparent 50%),
-        linear-gradient(180deg, var(--light-bg) 0%, #f0ede8 100%);
+    text-align: center;
+}
+
+.borders-container {
+    background: linear-gradient(135deg, var(--cream) 0%, var(--warm-cream) 100%);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 
+        0 6px 20px rgba(93, 78, 55, 0.12),
+        0 2px 6px rgba(93, 78, 55, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    max-width: 700px;
+    margin: 0 auto;
+    border-left: 5px solid var(--cozy-brown);
 }
 
 .borders-image-wrapper {
     position: relative;
-    max-width: 900px;
-    margin: 0 auto;
-    border-radius: 16px;
+    width: 100%;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: 
-        0 15px 50px rgba(61, 47, 31, 0.3),
-        0 5px 15px rgba(61, 47, 31, 0.2);
+        0 10px 30px rgba(61, 47, 31, 0.2),
+        0 3px 10px rgba(61, 47, 31, 0.15);
     background: #000;
-    border: 3px solid rgba(201, 169, 97, 0.2);
 }
 
 .borders-image {
@@ -623,11 +632,13 @@ footer::before {
         font-size: 1.8rem;
     }
 
-    .borders-image-wrapper {
-        border-radius: 12px;
-        margin: 0 auto;
-        border-width: 2px;
+    .borders-container {
+        padding: 1.5rem;
         max-width: calc(100% - 40px);
+    }
+
+    .borders-image-wrapper {
+        border-radius: 10px;
     }
 
     .borders-image {
