@@ -8,18 +8,23 @@ const meetingData = {
     },
     pastMeetings: [
         {
-            date: "October 2024",
+            date: "October 2025",
             book: "Magpie Murders by Anthony Horowitz",
             location: "Drea and Eric's"
         },
         {
-            date: "July 2024",
+            date: "July 2025",
             book: "The Wisteria Society of Lady Scoundrels by India Holton",
             location: "Cancelled"
         },
         {
-            date: "June 2024",
+            date: "June 2025",
             book: "Going Postal by Terry Pratchett",
+            location: "Cale's"
+        },
+        {
+            date: "May 2025",
+            book: "Red Rising",
             location: "Cale's"
         }
     ]
