@@ -212,6 +212,14 @@ section h2 {
     text-align: center;
 }
 
+.memorial-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
 .borders-container {
     background: linear-gradient(135deg, var(--cream) 0%, var(--warm-cream) 100%);
     padding: 2rem;
@@ -629,6 +637,10 @@ footer::before {
     }
 
     .hero h2 {
+        font-size: 1.8rem;
+    }
+
+    .memorial-heading {
         font-size: 1.8rem;
     }
 
